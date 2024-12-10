@@ -22,9 +22,11 @@ return {
         })
 
         mason_lspconfig.setup({
+            automatic_installation = true,
             -- list of servers for mason to install
             ensure_installed = {
-                "tsserver",
+                "ts_ls",
+                "ast_grep",
                 "html",
                 "cssls",
                 "tailwindcss",
