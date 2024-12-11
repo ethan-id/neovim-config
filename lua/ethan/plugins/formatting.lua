@@ -11,7 +11,9 @@ return {
                     args = {
                         "--stdin-filepath", "$FILENAME",
                         "--tab-width", "4",
-                        "--use-tabls", "false",
+                        "--use-tabs", "false",
+                        "--trailing-comma", "none",
+                        "--bracket-spacing", "false",
                     },
                     stdin = true,
                     env = {},
