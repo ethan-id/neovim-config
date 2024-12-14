@@ -15,6 +15,7 @@ return {
                         "--bracket-spacing", "false",
                         "--single-quote", "true",
                         "--jsx-single-quote", "true",
+                        "--print-width", "120",
                     },
                     stdin = true,
                     env = {},
