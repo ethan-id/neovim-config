@@ -5,7 +5,13 @@ return {
     opts = {
         options = {
             mode = "tabs",
-            separator_style = "slant",
+            filetype = "NvimTree_1",
+            text = function()
+                return vim.fn.getcwd()
+            end,
+            highlight = "Directory",
+            text_align = "left",
+            separator_style = "thick",
         },
     },
 }
