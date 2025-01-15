@@ -16,6 +16,7 @@ return {
                         "--single-quote", "true",
                         "--jsx-single-quote", "true",
                         "--print-width", "120",
+                        "--single-attribute-per-line", "true",
                     },
                     stdin = true,
                     env = {},
