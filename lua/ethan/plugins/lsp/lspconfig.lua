@@ -121,7 +121,7 @@ return {
                     capabilities = capabilities,
                     filetypes = { "rust" },
                 })
-            end
+            end,
         })
     end,
 }
