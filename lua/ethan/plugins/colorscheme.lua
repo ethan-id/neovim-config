@@ -1,13 +1,4 @@
 return {
-    -- Override LazyVim's default colorscheme setting to use Catppuccin
-    {
-        "LazyVim/LazyVim",
-        opts = {
-            colorscheme = function()
-                require("catppuccin").load()
-            end,
-        },
-    },
     -- Catppuccin theme plugin configuration
     {
         "catppuccin/nvim",
