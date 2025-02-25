@@ -1,8 +1,52 @@
-return { 
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-        vim.cmd.colorscheme("catppuccin")
-    end
+return {
+    -- Override LazyVim's default colorscheme setting to use Catppuccin
+    {
+        "LazyVim/LazyVim",
+        opts = {
+            colorscheme = function()
+                require("catppuccin").load()
+            end,
+        },
+    },
+    -- Catppuccin theme plugin configuration
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000,
+        opts = {
+            no_italic = true,
+            term_colors = true,
+            transparent_background = false,
+            styles = {
+                comments = {},
+                conditionals = {},
+                loops = {},
+                functions = {},
+                keywords = {},
+                strings = {},
+                variables = {},
+                numbers = {},
+                booleans = {},
+                properties = {},
+                types = {},
+            },
+            color_overrides = {
+                mocha = {
+                    base = "#000000",
+                    mantle = "#000000",
+                    crust = "#000000",
+                },
+            },
+            integrations = {
+                telescope = {
+                    enabled = false,
+                    style = "nvchad",
+                },
+                dropbar = {
+                    enabled = true,
+                    color_mode = true,
+                },
+            },
+        },
+    },
 }

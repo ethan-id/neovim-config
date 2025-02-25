@@ -85,6 +85,14 @@ return {
                     capabilities = capabilities,
                 })
             end,
+            ["pyright"] = function()
+                -- configure graphql language server
+                lspconfig["pyright"].setup({
+                    capabilities = capabilities,
+                    filetypes = { "python" },
+                })
+            end,
+
             ["graphql"] = function()
                 -- configure graphql language server
                 lspconfig["graphql"].setup({
