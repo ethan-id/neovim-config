@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     { "LazyVim/LazyVim",           lazy = false },
+    { "catppuccin/nvim" },
     { import = "ethan.plugins" },
     { import = "ethan.plugins.lsp" }
 }, {
