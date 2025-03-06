@@ -130,6 +130,12 @@ return {
                     filetypes = { "rust" },
                 })
             end,
+            ["gopls"] = function()
+                lspconfig["gopls"].setup({
+                    capabilities = capabilities,
+                    filetypes = { "go" },
+                })
+            end,
         })
     end,
 }
