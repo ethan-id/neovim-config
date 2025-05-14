@@ -136,6 +136,12 @@ return {
                     filetypes = { "go" },
                 })
             end,
+            ["terraformls"] = function()
+                lspconfig["terraformls"].setup({
+                    capabilities = capabilities,
+                    filetypes = { "terraform" },
+                })
+            end,
         })
     end,
 }
