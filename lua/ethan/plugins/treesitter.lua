@@ -44,6 +44,7 @@ return {
                 "query",
                 "vimdoc",
                 "c",
+                "pyright",
             },
             incremental_selection = {
                 enable = true,
