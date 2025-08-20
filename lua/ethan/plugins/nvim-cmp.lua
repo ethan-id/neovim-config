@@ -22,6 +22,34 @@ return {
 
         local lspkind = require("lspkind")
 
+        -- Compatibility: On some Neovim builds, a wrong bufnr type bubbles into client.request.
+        -- Wrap cmp-nvim-lsp to call the internal client _request with bufnr=0 explicitly.
+        do
+            local ok, lsp_src = pcall(require, "cmp_nvim_lsp.source")
+            if ok and type(lsp_src) == "table" and type(lsp_src._request) == "function" then
+                local original = lsp_src._request
+                lsp_src._request = function(self, method, params, callback)
+                    if self.request_ids[method] ~= nil then
+                        self.client:cancel_request(self.request_ids[method])
+                        self.request_ids[method] = nil
+                    end
+                    local _, request_id
+                    _, request_id = self.client:_request(method, params, function(err, result, ctx)
+                        if self.request_ids[method] ~= request_id then
+                            return
+                        end
+                        self.request_ids[method] = nil
+                        if err and err.code == -32801 then
+                            self:_request(method, params, callback)
+                            return
+                        end
+                        callback(err, result)
+                    end, 0)
+                    self.request_ids[method] = request_id
+                end
+            end
+        end
+
         -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
         require("luasnip.loaders.from_vscode").lazy_load()
 
