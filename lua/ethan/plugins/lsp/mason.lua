@@ -29,6 +29,7 @@ return {
             automatic_installation = true,
             -- list of servers for mason to install
             ensure_installed = {
+                "angularls",
                 "terraformls",
                 "gopls",
                 "ts_ls",

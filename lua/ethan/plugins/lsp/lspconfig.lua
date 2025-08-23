@@ -85,6 +85,32 @@ return {
                     capabilities = capabilities,
                 })
             end,
+            ["angularls"] = function()
+                local util = require("lspconfig.util")
+                lspconfig["angularls"].setup({
+                    capabilities = capabilities,
+                    -- Ensure we only start in Angular workspaces
+                    root_dir = util.root_pattern("angular.json", "workspace.json", "nx.json"),
+                    -- Help the server resolve the project's local TypeScript and Angular packages
+                    on_new_config = function(new_config, root_dir)
+                        new_config.cmd = { "ngserver", "--stdio", "--tsProbeLocations", root_dir, "--ngProbeLocations", root_dir }
+                    end,
+                    filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" },
+                })
+            end,
+            ["ts_ls"] = function()
+                local util = require("lspconfig.util")
+                -- Do not start the generic TS server inside Angular workspaces to avoid conflicts
+                lspconfig["ts_ls"].setup({
+                    capabilities = capabilities,
+                    root_dir = function(fname)
+                        if util.root_pattern("angular.json", "workspace.json", "nx.json")(fname) then
+                            return nil
+                        end
+                        return util.root_pattern("package.json", "tsconfig.json", ".git")(fname)
+                    end,
+                })
+            end,
             ["pyright"] = function()
                 -- configure graphql language server
                 lspconfig["pyright"].setup({
