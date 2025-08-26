@@ -180,11 +180,24 @@ return {
                         "--completion-style=detailed",
                         "--function-arg-placeholders",
                         "--fallback-style=llvm",
+                        "--query-driver=/usr/bin/g++*,/usr/bin/clang++*",
+                        "--enable-config",
                     },
                     init_options = {
                         usePlaceholders = true,
                         completeUnimported = true,
                         clangdFileStatus = true,
+                    },
+                    -- Add C++ standard library include paths for macOS
+                    settings = {
+                        clangd = {
+                            includePath = {
+                                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1",
+                                "/Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include",
+                                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include",
+                                "/Library/Developer/CommandLineTools/usr/include",
+                            },
+                        },
                     },
                 })
             end,
